@@ -34,8 +34,10 @@ s.connect((host, port))
 msg = 'initMsg'
 while msg != '@end':
 	length = int(s.recv(8))
+	s.send(bytes('y', "utf-8"))
 	msg = s.recv(length)
-	msg = msg.decode(encoding="utf-8")	
+	msg = msg.decode(encoding="utf-8")
+	s.send(bytes('y', "utf-8"))
 	if msg != '@end':
 		print(msg)
 print("Connection closed.")

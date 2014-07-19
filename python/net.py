@@ -10,11 +10,13 @@ import pdb
 def sendMessage(csock, message):
 	print('Transmitting', sys.getsizeof(message), "bytes")
 	csock.send(bytes(str(sys.getsizeof(message)), "utf-8"))
+	csock.recv(4)
 	csock.send(bytes(message, "utf-8"))
-	print("Transmission complete.")
+	csock.recv(4)
+	print('Transmission complete.')
 
 #Initialize the server socket
-print('Initializing...')
+print('Initializing Blacklight OTP Server build 13...')
 s = socket.socket()
 host = socket.gethostname()
 port = 32253
@@ -29,11 +31,6 @@ while True:
 	#Send banner message
 	sendMessage(csock, 'Connected.\n\n')
 	sendMessage(csock, 'Welcome to Blacklight Decrypto!')
-	userInput = "initUserInput"
-	userInput = input()
-	while userInput != "quit" and userInput != "q" and userInput != "":
-		sendMessage(csock, userInput)
-		userInput = input()
 	sendMessage(csock, '@end')
 	#Close the connection
 	csock.close()
