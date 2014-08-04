@@ -4,7 +4,6 @@
 
 import socket
 import sys
-import pdb
 
 #Parse command line arguments
 useFile = False;
